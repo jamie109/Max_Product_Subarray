@@ -3,6 +3,9 @@
 @Author ：jamie109
 @Date ：2023/5/18
 """
+import sys
+from ast import literal_eval
+
 import numpy as np
 
 
@@ -29,7 +32,7 @@ class MaxProduct:
         self.lenth = len(arr_input)
 
         if self.lenth == 0:
-            exit("blank array, exit")
+            sys.exit("blank array, exit")
 
         self.max_product = arr_input[0]
         self.cur_min = arr_input[0]
@@ -68,15 +71,15 @@ def get_array():
     """
     array_input = []
     try:
-        array_input = eval(input("please input an array like [-1,2,3,4]："))
+        array_input = literal_eval(input("please input an array like [-1,2,3,4]："))
         # 大于一维
         if len(np.array(array_input).shape) > 1:
-            exit("Error, not a 1-D array")
+            sys.exit("Error, not a 1-D array")
     except SyntaxError:
-        exit("Syntax Error, input again")
+        sys.exit("Syntax Error, input again")
     # 输入单词 汉字
     except NameError:
-        exit("NameError, please input an array")
+        sys.exit("NameError, please input an array")
     #print(type(array_input))
     return array_input
 
@@ -87,11 +90,11 @@ def read_array():
     :return: 2D list [arr1, arr2, arr3]
     """
     arrays = []
-    with open('data.txt') as file:
+    with open('data.txt', encoding = 'utf-8') as file:
         lines = file.readlines()
         for line in lines:
             cur_arr = line.split()
-            cur_arr = [eval(item) for item in cur_arr]
+            cur_arr = [literal_eval(item) for item in cur_arr]
             # print(cur_arr)
             # print(type(cur_arr))
             arrays.append(cur_arr)
