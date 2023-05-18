@@ -46,5 +46,7 @@ class MaxProTest(unittest.TestCase):
         maxpro = MaxProduct()
         maxpro.set_arr([0, 4, -6, 0, 2, -7, 9, -1, 8])
         self.assertEqual(maxpro.cal_max_pro(), 1008)
+
+
 if __name__ == '__main__':
     unittest.main()
