@@ -1,16 +1,37 @@
-# 这是一个示例 Python 脚本。
+def max_product_subarray(nums):
+    if not nums:
+        return 0, []
 
-# 按 Shift+F10 执行或将其替换为您的代码。
-# 按 双击 Shift 在所有地方搜索类、文件、工具窗口、操作和设置。
+    max_product = nums[0]
+    current_max = nums[0]
+    current_min = nums[0]
+    max_start = 0
+    max_end = 0
+    start = 0
+
+    for i in range(1, len(nums)):
+        if nums[i] < 0:
+            # 交换当前最大值和最小值
+            current_max, current_min = current_min, current_max
+
+        # 更新当前最大值和最小值
+        current_max = max(nums[i], current_max * nums[i])
+        current_min = min(nums[i], current_min * nums[i])
+
+        # 更新全局最大乘积及子数组的起始和结束位置
+        if current_max > max_product:
+            max_product = current_max
+            max_start = start
+            max_end = i
+
+        # 如果当前最大乘积变为0，重置起始位置
+        if current_max == 0:
+            start = i + 1
+
+    return max_product, nums[max_start - 1:max_end+1]
 
 
-def print_hi(name):
-    # 在下面的代码行中使用断点来调试脚本。
-    print(f'Hi, {name}')  # 按 Ctrl+F8 切换断点。
-
-
-# 按间距中的绿色按钮以运行脚本。
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# 访问 https://www.jetbrains.com/help/pycharm/ 获取 PyCharm 帮助
+    max_p, l = max_product_subarray([1, 0, -3, 2, -5])
+    print(max_p)
+    print(l)
