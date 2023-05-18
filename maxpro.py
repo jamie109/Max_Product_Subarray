@@ -60,7 +60,7 @@ class MaxProduct:
             # meet 0 restart the subarray
             if self.cur_max == 0:
                 tmp_start = i + 1
-
+        return self.max_product
 
 def get_array():
     """
