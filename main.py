@@ -1,37 +1,80 @@
-def max_product_subarray(nums):
-    if not nums:
-        return 0, []
 
-    max_product = nums[0]
-    current_max = nums[0]
-    current_min = nums[0]
-    max_start = 0
-    max_end = 0
-    start = 0
+"""
+@File ：main.py
+@Author ：jamie109
+@Date ：2023/5/18
+"""
 
-    for i in range(1, len(nums)):
-        if nums[i] < 0:
-            # 交换当前最大值和最小值
-            current_max, current_min = current_min, current_max
+class MaxProduct:
+    """
+    cal the max product in subarrays
+    """
+    def __init__(self):
+        self.max_product = 0
+        self.cur_min = 0
+        self.cur_max = 0
+        self.arr = []
+        self.lenth = 0
 
-        # 更新当前最大值和最小值
-        current_max = max(nums[i], current_max * nums[i])
-        current_min = min(nums[i], current_min * nums[i])
+    def set_arr(self, arr_input):
+        """
+        get the array to cal
+        :param arr_input:
+        :return:
+        """
+        self.arr = arr_input
+        self.lenth = len(arr_input)
 
-        # 更新全局最大乘积及子数组的起始和结束位置
-        if current_max > max_product:
-            max_product = current_max
-            max_start = start
-            max_end = i
+        if self.lenth == 0:
+            exit("blank array, exit")
 
-        # 如果当前最大乘积变为0，重置起始位置
-        if current_max == 0:
-            start = i + 1
+        self.max_product = arr_input[0]
+        self.cur_min = arr_input[0]
+        self.cur_max = arr_input[0]
+        print(f"set arr finish")
 
-    return max_product, nums[max_start - 1:max_end+1]
+    def cal_max_pro(self):
+        """
+        cal max product
+        :return:
+        """
+        for i in range(1, self.lenth):
+            if self.arr[i] < 0:
+                # exchange current max and min
+                self.cur_max, self.cur_min = self.cur_min, self.cur_max
+            # update current max and min
+            self.cur_max = max(self.arr[i], self.cur_max * self.arr[i])
+            self.cur_min = min(self.arr[i], self.cur_min * self.arr[i])
+            # update max_product
+            if self.max_product < self.cur_max:
+                self.max_product = self.cur_max
+
+
+def get_array():
+    """
+    get the array
+    :return: array list
+    """
+    array_input = []
+    try:
+        array_input = eval(input("please input an array like [1,2,34]："))
+    except SyntaxError:
+        print("Syntax Error, input again")
+    # 输入单词 汉字
+    except NameError:
+        print("NameError, please input an array")
+
+    #print(type(array_input))
+    return array_input
+
 
 
 if __name__ == '__main__':
-    max_p, l = max_product_subarray([1, 0, -3, 2, -5])
-    print(max_p)
-    print(l)
+    # max_p, l = max_product_subarray([1, 0, -3, 2, -5])
+    # print(max_p)
+    # print(l)
+    arr = get_array()
+    max_pro = MaxProduct()
+    max_pro.set_arr(arr)
+    max_pro.cal_max_pro()
+    print(f"the max product is {max_pro.max_product}")
