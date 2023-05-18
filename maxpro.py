@@ -104,11 +104,12 @@ if __name__ == '__main__':
     arr = get_array()
     max_pro = MaxProduct()
     max_pro.set_arr(arr)
-    max_pro.cal_max_pro()
+    res = max_pro.cal_max_pro()
 
-    print(f"the max product is {max_pro.max_product} and the subarray is"
+    print(f"the max product is {res} and the subarray is"
           f" {arr[max_pro.start_idx : max_pro.end_idx + 1]}")
 
+    input("Press any key to exit")
     # # read data from txt
     # arrs = read_array()
     # #print(arrs)
