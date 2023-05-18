@@ -1,13 +1,11 @@
 """
-@File ：main.py
+@File ：maxpro.py
 @Author ：jamie109
 @Date ：2023/5/18
 """
 import sys
 from ast import literal_eval
-
 import numpy as np
-
 
 class MaxProduct:
     """
@@ -107,6 +105,7 @@ if __name__ == '__main__':
     max_pro = MaxProduct()
     max_pro.set_arr(arr)
     max_pro.cal_max_pro()
+
     print(f"the max product is {max_pro.max_product} and the subarray is"
           f" {arr[max_pro.start_idx : max_pro.end_idx + 1]}")
 
